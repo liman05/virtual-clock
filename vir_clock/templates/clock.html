@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="{% static 'clock.css' %}">
+    <title>Document</title>
+
+    <style>
+        h1{
+            color: red;
+        }
+        center{
+            border: 3px solid red;
+            width: 50%;
+            padding: 8px;
+            margin-left: 22%;
+            margin-top: 5%;
+            border-radius: 10px;;
+            
+        }
+        .intro p{
+            color: brown;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .time{
+            border: 1px solid black;
+            width: 200px;
+            padding: 2px;
+            border-radius: 35px;
+        }
+        #descrip{
+            font-size: 12px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .date p{
+            border-top: 1px solid red;
+            border-bottom: 1px solid black;
+            margin-top: 14px;
+            width: 150px;
+            padding: 5px;
+        }
+           
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+}
+
+
+    </style>
+</head>
+<body>
+  
+
+    <center>
+        <h1>clock</h1>
+        <div class="intro">
+            <p>Hello , Time Doesnt Wait For You, <br> So Surry SO Now Your Goals Awaits</p>
+        </div>
+        <div class="time">
+            <p id="row"> </p>
+            <p id="descrip">hour min sec  am</p>
+        </div>
+        <div class="date">
+             <p id="dat"> </p>
+        </div>
+    </center>
+    <div class="background-video">
+        <video autoplay muted loop>
+            <source src="{% static 'video(2160p).mp4' %}" type="video/mp4">
+        </video>
+        
+    </div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+
+            var timeString = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('row').innerHTML = timeString;
+
+            var date = now.toDateString();
+            document.getElementById('dat').innerHTML = date;
+        }
+
+        setInterval(updateClock, 1000);
+
+        updateClock();
+    </script>
+</body>
+</html>
